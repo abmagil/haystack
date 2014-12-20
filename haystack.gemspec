@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency "rails", "~> 4.1.8"
+  s.add_dependency 'haml-rails'
   s.add_dependency 'simple_form'
 
   s.add_development_dependency "sqlite3"
