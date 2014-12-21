@@ -36,7 +36,11 @@ module Haystack
     # Querying methods
     #############################################################################
 
-    # The heart of the engine
+    # The heart of the engine is the combination of :method_missing
+
+    def method_missing
+    end
+
     def perform_query
       # Reduce as in map-reduce- merges down array of queries into a single one
       condition_parts.reduce(:merge)
