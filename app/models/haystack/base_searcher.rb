@@ -27,30 +27,40 @@ module Haystack
     # requires each attribute in the hash to be names the same as the class property
     def mass_assign(attributes)
       attributes.each do |attribute, value|
-        respond_to?(:"#{attribute}=") && send(:"#{attribute}=", value)
+        respond_to?("#{attribute}=") && send("#{attribute}=", value)
       end
-    end   
-
+    end
 
     #############################################################################
     # Querying methods
     #############################################################################
-
-    # The heart of the engine is the combination of :method_missing
-
-    def method_missing
-    end
-
     def perform_query
-      # Reduce as in map-reduce- merges down array of queries into a single one
-      condition_parts.reduce(:merge)
+      # Reduce as in map-reduce- ANDs together multiple SQL queries
+      # while still lazy-loading them
+      condition_part_array.reduce(:merge)
     end
 
-    # Finds each method named *_conditions and runs it in the concrete class
-    # Returns an array of ActiveRecord::Relation objects
-    def condition_parts
-      ### Subclass MUST respond with at least 1 non-nil AR::Relation object  ###
-      private_methods(false).grep(/_conditions$/).map { |m| send(m) }.compact
+    # For each param passed from the front-end, fire a "*_conditions" method
+    def condition_part_array
+      ar_relation_array = []
+      self.instance_variables.each do |ivar| # e.g. :@name, :@phone
+        new_method_name = "#{ivar.to_s.sub('@','')}_conditions"
+        ar_relation_array << self.send(new_method_name)
+      end
+      ar_relation_array
+    end
+
+    # method_missing will, when passed "_conditions" methods, create an equality-
+    # based AR:Relation
+    def method_missing(meth, *args, &block)
+      # NOTE: We are intentionally setting regex_match_data var here, NOT ==
+      if regex_match_data = /(.*?)_conditions/.match(meth) # match returns nil
+        hash = {}
+        hash[regex_match_data[1]] = self.instance_variable_get(("@"+regex_match_data[1]))
+        self.class::BASE.send(:where, hash) # self.class::BASE = BASE for the subclass
+      else
+        super
+      end
     end
   end
 end

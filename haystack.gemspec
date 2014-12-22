@@ -9,16 +9,14 @@ Gem::Specification.new do |s|
   s.version     = Haystack::VERSION
   s.authors     = ["Aaron Magil"]
   s.email       = ["amagil@camsys.com"]
-  s.homepage    = "http://www.camsys.com"
-  s.summary     = "A Simple Searcher based on work in TransAM."
+  s.homepage    = "https://github.com/abmagil/haystack"
+  s.summary     = "A Simple Searcher"
+  s.description = "Haystack is based on work by Julian Ray and Aaron Magil for Cambridge Systematics TransAM."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency "rails", "~> 4.1.8"
-  s.add_dependency 'haml-rails'
-  s.add_dependency 'simple_form'
+  s.add_dependency "rails", "~> 4.1"
 
-  s.add_development_dependency "sqlite3"
 end

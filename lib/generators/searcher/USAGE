@@ -1,0 +1,8 @@
+Description:
+    Generates a concrete searcher model and the relevant views
+
+Example:
+    rails generate searcher ModelName
+
+    This will create:
+        app/searchers/model_name_searcher.rb
