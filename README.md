@@ -1,4 +1,7 @@
 # Haystack
+
+[![Gem Version](https://badge.fury.io/rb/haystack.svg)](http://badge.fury.io/rb/haystack) [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)]() 
+
 **Haystack** is a small searching gem.  It was developed based on work for [Cambridge Systematics](http://www.camsys.com) TransAM Asset Management platform.  It is designed to be
 
 + driven by rails conventions
@@ -10,5 +13,3 @@ Haystack has the smarts to search for you, but you'll need to tell it about your
 
 ## Usage
 TODO
-
-######This is released using the MIT-LICENSE.  Go nuts, everybody.
