@@ -1,3 +1,5 @@
+# Generates searchers with concrete functionality, when passed model names
+# i.e. rails g searcher User will create a UserSearcher
 class SearcherGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
 
