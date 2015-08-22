@@ -2,7 +2,7 @@
 # i.e. rails g searcher User will create a UserSearcher
 class SearcherGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
-  class_option :views, type: :boolean, default: true, description: "Include views"
+  class_option :views, type: :boolean, default: true, desc: "Generate views"
 
   def create_searcher_model
     empty_directory File.join("app", "searchers")
