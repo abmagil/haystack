@@ -23,6 +23,6 @@ class SearcherGenerator < Rails::Generators::NamedBase
 
   private
   def model_names
-    ARGV[0..-2].map(&:underscore)
+    ARGV.map(&:underscore)
   end
 end
