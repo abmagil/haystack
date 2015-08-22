@@ -5,7 +5,9 @@ class SearcherGenerator < Rails::Generators::NamedBase
 
   def create_searcher_model
     
-    empty_directory File.join("app", "searchers")
+    dir_name = File.join("app", "searchers")
+    # unless Dir.exists? guards against deleting entire directory on `rails destroy`
+    empty_directory dir_name unless Dir.exists?(dir_name)
     model_names.each do |name|
       template "searcher_template.rb", File.join("app","searchers", "#{name}_searcher.rb")
     end
