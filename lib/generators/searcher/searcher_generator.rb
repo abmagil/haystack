@@ -16,6 +16,7 @@ class SearcherGenerator < Rails::Generators::NamedBase
   private
   def model_names
     ARGV
+      .map(&:classify)
       .select{|model_name| is_app_class?(model_name)}
       .map(&:underscore)
   end
