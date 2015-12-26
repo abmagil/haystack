@@ -29,6 +29,7 @@ class SearcherGenerator < Rails::Generators::Base
   private
   def model_names
     models
+      .map(&:classify)
       .select{|model_name| is_app_class?(model_name)}
       .map(&:underscore)
   end
