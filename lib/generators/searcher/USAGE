@@ -6,3 +6,4 @@ Example:
 
     This will create:
         app/searchers/model_name_searcher.rb
+        app/views/searchers/model_name/new.html.erb
