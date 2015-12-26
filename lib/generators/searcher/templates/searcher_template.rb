@@ -1,11 +1,10 @@
 ###############################################################################
-# <%= @model.camelize %>Searcher: Searches over your <%= @model.camelize %> Model
+# <%= name.camelize %>Searcher: Searches over your <%= name.camelize %> Model
 # 
 ###############################################################################
+class <%= name.camelize %>Searcher < Haystack::BaseSearcher
 
-class <%= @model.camelize %>Searcher < Haystack::BaseSearcher
-
-  BASE = <%= @model.camelize %>
+  BASE = <%= name.camelize %>
 
   #############################################################################
   # SEARCHABLE FIELDS: uncomment `attr_accessor` below and define any model

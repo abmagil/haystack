@@ -1,8 +1,7 @@
 # Generates searchers with concrete functionality, when passed model names
 # i.e. rails g searcher User will create a UserSearcher
-class SearcherGenerator < Rails::Generators::Base
+class SearcherGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
-  argument :models, type: :array, required: true
   class_option :views, type: :boolean, default: true, desc: "Generate views"
 
   def create_searcher_model
@@ -10,9 +9,7 @@ class SearcherGenerator < Rails::Generators::Base
     # unless Dir.exists? guards against deleting entire directory on `rails destroy`
     empty_directory dir_name unless Dir.exists?(dir_name)
     model_names.each do |name|
-      # must use ivar to share state with Template file ERB
-      @model = name
-      template "searcher_template.rb", File.join("app","searchers", "#{@model}_searcher.rb")
+      template "searcher_template.rb", File.join("app","searchers", "#{name}_searcher.rb")
     end
   end
 
@@ -29,6 +26,7 @@ class SearcherGenerator < Rails::Generators::Base
   private
   def model_names
     models
+      .map(&:classify)
       .select{|model_name| is_app_class?(model_name)}
       .map(&:underscore)
   end
